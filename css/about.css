@@ -280,6 +280,8 @@ button,
 /* ABOUT US END */
 
 /* ABOUT US CONTENT */
+
+
 #about-content .row{
     margin-top:3%;
     margin-right:7%;
@@ -338,7 +340,7 @@ font-family:"montserrat.SemiBold";
 
 #slider-staff button{
     font-family:"montserrat.Light";
-    font-size: calc(13pt + (28 - 13) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(5pt + (28 - 5) * ((100vw - 300px) / (1600 - 300)));
     text-align: center;
     border:none;
     margin:0 auto;
@@ -359,6 +361,8 @@ font-family:"montserrat.SemiBold";
     position:relative;
     border-bottom:5px solid #1A6FB0;
     padding-bottom:4%;
+    margin-top:4%;
+    
 }
 
 .staff-block{
@@ -385,6 +389,7 @@ font-family:"montserrat.SemiBold";
     position:absolute;
     bottom:3%;
     right:0;
+    padding-bottom:10px;
 
 }
 
@@ -470,10 +475,34 @@ font-family:"montserrat.SemiBold";
     background-color:#1A1A1A;
     color:white;
     font-family:"montserrat.regular";
-    font-size: calc(8pt + (10 - 8) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(7pt + (10 - 7) * ((100vw - 300px) / (1600 - 300)));
 }
 
 .last-foot .row{
     margin-left:7%;
     margin-right:7%;
+}
+
+@media (max-width: 575.98px) {
+
+    
+
+    #slider-1 .col-lg-4{
+        margin-bottom:15%;
+        margin-top:15%;
+    }
+
+    .row2{
+        margin-top:0;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #slider-1 .col-lg-4{
+        margin-bottom:15%;
+        margin-top:15%;
+    }
+    .row2{
+        margin-top:0;
+    }
 }

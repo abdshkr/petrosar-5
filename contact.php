@@ -18,7 +18,8 @@ if (isset($_POST['send'])){
 	include 'phpmailer/class.smtp.php';
 
 	$mail = new PHPMailer;
-	$nametxt = $_POST['f_name'];
+	
+	
 	if(empty($_POST["f_name"]))
 	{
 		$nameError = "Name is required";
@@ -54,16 +55,17 @@ if (isset($_POST['send'])){
 	{
 		if(preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^",$email))
 		{
+			
 			$mail->isSMTP();
-			$mail->Host='smtp.gmail.com';
-			$mail->Port=587;
+			$mail->Host='mail.petrosar.my';
+			$mail->Port=465;
 			$mail->SMTPAuth=true;
-			$mail->SMTPSecure='tls';
-			$mail->Username='abdshkr@gmail.com';
-			$mail->Password='23659210shakir';
+			$mail->SMTPSecure='ssl';
+			$mail->Username='admin@petrosar.my';
+			$mail->Password='Petros@r!';
 
-			$mail->setFrom('contact.petrosar@gmail.com');
-			$mail->addAddress('abdshkr@gmail.com', 'Petrosar Academy');
+			$mail->setFrom('admin@petrosar.my');
+			$mail->addAddress('abdshkr@gmail.com', 'Website Contact');
 			$mail->addReplyTo($_POST['f_email'],$_POST['f_name']);
 			$f_msg = $_POST['f_msg'];
 			$fmsg = implode(" ",$f_msg);
@@ -136,11 +138,18 @@ else if(isset($_POST['submit']))
 	$maxsize = 2 * 1024 * 1024; // 2 MB
 	$types = array('text/pdf');
 	$uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $_FILES['file']['name']));
+	$filename = $_FILES['file']['name'][$key]; 
 	
 	if(filesize($uploadfile) == 0)
 	{
-		$fileError = "Please insert your attachment";
+		$fileError = "Please check your attachment";
 	}
+
+	if(filesize($filename) > $maxsize)
+	{
+		$fileError = "Max size 2MB Only";
+	}
+
 
 	
 	if( !($_POST["cv_name"]=='') && !($_POST["cv_mail"]=='') && !($_POST["cv_pos"]=='') &&!($_POST["cv_contact"]=='') &&!($uploadfile=='')  )
@@ -150,16 +159,16 @@ else if(isset($_POST['submit']))
 			if(filesize($uploadfile) < $maxsize )
 			{
 				$mail->isSMTP();
-				$mail->Host='smtp.gmail.com';
-				$mail->Port=587;
+				$mail->Host='mail.petrosar.my';
+				$mail->Port=465;
 				$mail->SMTPAuth=true;
-				$mail->SMTPSecure='tls';
-				$mail->Username='abdshkr@gmail.com';
-				$mail->Password='23659210shakir';
+				$mail->SMTPSecure='ssl';
+				$mail->Username='admin@petrosar.my';
+				$mail->Password='Petros@r!';
 			
 				if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-					$mail->setFrom('contact.petrosar@gmail.com');
-					$mail->addAddress('abdshkr@gmail.com', 'Petrosar Academy');
+					$mail->setFrom('admin@petrosar.my');
+					$mail->addAddress('abdshkr@gmail.com', 'Job Applicants');
 					$mail->addReplyTo($_POST['cv_mail'],$_POST['cv_name']);
 					$mail->addAttachment($uploadfile, $_POST['cv_name'].'-cv.pdf');
 
@@ -537,11 +546,11 @@ else if(isset($_POST['submit']))
         <div class="col-lg-3">
                 <a href='./course.html' id ="link-foot"><h4>COURSES</h4></a>
                 <hr style="border-color:grey; display:block; border-width: 1px;">
-                <p><a href='./course.html#col-gas' id ="link-foot">Gas Pipe Fitting</a><br>
-                <a href='./course.html#col-tcin' id ="link-foot">Training and Consultancy Industries</a><br>
-                <a href='./course.html#col-tcimf' id ="link-foot">Training and Consultancy Management Fields</a><br>
-                <a href='./course.html#col-drone' id ="link-foot">Drone Operator License</a><br>
+                <p><a href='./course.html#col-gas' id ="link-foot">Petroleum & Gas</a><br>
+                <a href='./course.html#col-tcimf' id ="link-foot">Training & Consultancy in Management Field</a><br>
+                <a href='./course.html#col-drone' id ="link-foot">Drone Operator License Training Course</a><br>
                 <a href='./course.html#col-adobe' id ="link-foot">ADOBE</a><br>
+                <a href='./course.html#col-driving' id ="link-foot">Defensive Driving Course</a><br>
                 <a href='./course.html#col-comp' id ="link-foot">CompTIA</a></p>
         
                 
@@ -578,12 +587,10 @@ else if(isset($_POST['submit']))
         <div class="last-foot">
         <div class="container-fluid">
         <div class="row" style="margin-top:1%;">
-        <div class="col-lg-6" >
+        <div class="col-lg-12" style="text-align: center;">
                 <p>© Copyright 2018. Petrosar Sarawak All Rights Reserved.</p>
         </div>
-        <div class="col-lg-6" style="text-align: left;">
-                <p>Terms & Conditions | Legal information | Privacy policy | Cookie policy | Site map | Support Centre</p>
-        </div>
+        
         </div>
         </div>
         </div>
